@@ -142,6 +142,8 @@ elif(choice=="June"):
     st.subheader("Network Drawing of June")
     drawNetwork(juneG)
 
+st.sidebar.markdown("Drawing the network graph may talk a very long time (up to a few minutes!), please have patience, thank you.")
+
 #Now we will find which locations are most frequently traveled by proportion through betweenness centrality
 def bCent(month,monthName):
     bc = nx.betweenness_centrality(month)
@@ -216,25 +218,25 @@ plt.clf()
 st.subheader("Hypothesis Testing")
 alpha = 0.05
 
-#Is there a difference between population means of cases between days with a high amount of passengers (>=15000) and days with less passengers (<15000)?
-morePassengers = merged[merged["passenger_count"]>=15000]
-lessPassengers = merged[merged["passenger_count"]<15000]
-statistic, pvalue = stats.ttest_ind(morePassengers["MN_CASE_COUNT"], lessPassengers["MN_CASE_COUNT"], equal_var=False)
-st.write("The difference in population means of the number of cases between days with >=15000 passengers and days with <15000 passengers is statisically significant: ")
+#Is there a difference between population means of passengers between days with a high amount of cases (>=100) and days with less cases (<100)?
+moreCases = merged[merged["MN_CASE_COUNT"]>=100]
+lessCases = merged[merged["MN_CASE_COUNT"]<100]
+statistic, pvalue = stats.ttest_ind(moreCases["passenger_count"], lessCases["passenger_count"], equal_var=False)
+st.write("The difference in population means of the number of passengers between days with >=100 cases and days with <100 cases is statisically significant: ")
 st.write(pvalue < alpha)
 st.write(pvalue)
 
-#Is there a difference between population means of cases between days with a large amount of miles traveled (>=30000) and days with less miles traveled (<30000)?
-moreDistance = merged[merged["trip_distance"]>=30000]
-lessDistance = merged[merged["trip_distance"]<30000]
-statistic, pvalue = stats.ttest_ind(moreDistance["MN_CASE_COUNT"], lessDistance["MN_CASE_COUNT"], equal_var=False)
-st.write("The difference in population means of the number of cases between days with >=30000 miles traveled and days with <30000 miles traveled is statisically significant: ")
+#Is there a difference between population means of total miles traveled between days with a high amount of cases (>=100) and days with less cases (<100)?
+statistic, pvalue = stats.ttest_ind(moreCases["trip_distance"], lessCases["trip_distance"], equal_var=False)
+st.write("The difference in population means of the number of miles traveled between days with >=100 cases and days with <100 cases is statisically significant: ")
 st.write(pvalue < alpha)
 st.write(pvalue)
 
-#Is there a difference between population means of deaths between days with a high amount of passengers (>=15000) and days with less passengers (<15000)?
-statistic, pvalue = stats.ttest_ind(morePassengers["MN_DEATH_COUNT"], lessPassengers["MN_DEATH_COUNT"], equal_var=False)
-st.write("The difference in population means of the number of deaths between days with >=15000 passengers and days with <15000 passengers is statisically significant: ")
+#Is there a difference between population means of passengers between days with a high amount of deaths (>=15000) and days with less deaths (<15000)?
+moreDeaths = merged[merged["MN_DEATH_COUNT"]>=10]
+lessDeaths = merged[merged["MN_DEATH_COUNT"]<10]
+statistic, pvalue = stats.ttest_ind(moreDeaths["MN_DEATH_COUNT"], lessDeaths["MN_DEATH_COUNT"], equal_var=False)
+st.write("The difference in population means of the number of passengers between days with >=10 deaths and days with <10 deaths is statisically significant: ")
 st.write(pvalue < alpha)
 st.write(pvalue)
 
