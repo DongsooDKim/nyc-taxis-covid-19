@@ -232,11 +232,17 @@ st.write("The difference in population means of the number of miles traveled bet
 st.write(pvalue < alpha)
 st.write(pvalue)
 
-#Is there a difference between population means of passengers between days with a high amount of deaths (>=15000) and days with less deaths (<15000)?
+#Is there a difference between population means of passengers between days with a high amount of deaths (>=10) and days with less deaths (<10)?
 moreDeaths = merged[merged["MN_DEATH_COUNT"]>=10]
 lessDeaths = merged[merged["MN_DEATH_COUNT"]<10]
-statistic, pvalue = stats.ttest_ind(moreDeaths["MN_DEATH_COUNT"], lessDeaths["MN_DEATH_COUNT"], equal_var=False)
+statistic, pvalue = stats.ttest_ind(moreDeaths["passenger_count"], lessDeaths["passenger_count"], equal_var=False)
 st.write("The difference in population means of the number of passengers between days with >=10 deaths and days with <10 deaths is statisically significant: ")
+st.write(pvalue < alpha)
+st.write(pvalue)
+
+#Is there a difference between population means of total miles traveled between days with a high amount of deaths(>=10) and days with less deaths (<10)?
+statistic, pvalue = stats.ttest_ind(moreDeaths["trip_distance"], lessDeaths["trip_distance"], equal_var=False)
+st.write("The difference in population means of the number of miles traveled between days with >=10 deaths and days with <10 deaths is statisically significant: ")
 st.write(pvalue < alpha)
 st.write(pvalue)
 
