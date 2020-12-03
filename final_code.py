@@ -234,3 +234,7 @@ statistic, pvalue = stats.ttest_ind(morePassengers["MN_DEATH_COUNT"], lessPassen
 st.write("The difference in population means of the number of deaths between days with >=15000 passengers and days with <15000 passengers is statisically significant: ")
 st.write(pvalue < alpha)
 st.write(pvalue)
+
+st.header("Link to the Repository:")
+
+st.write("https://github.com/DongsooDKim/nyc-taxis-covid-19")
