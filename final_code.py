@@ -6,7 +6,6 @@ import seaborn as sns
 import numpy as np
 from scipy import stats
 import streamlit as st
-import zipfile
 
 #Title
 st.title("An Analysis on Manhattan's Yellow Taxis and COVID-19")
@@ -24,8 +23,6 @@ def load_zones():
     return pd.read_csv("taxi+_zone_lookup.csv")
 @st.cache
 def load_march():
-    zip = zipfile.ZipFile('yellow_tripdata_2020-03.zip')
-    zip.extractall()
     return pd.read_csv("yellow_tripdata_2020-03.csv",dtype=taxiDatatypes,parse_dates=["tpep_pickup_datetime","tpep_dropoff_datetime"])
 @st.cache
 def load_april():
