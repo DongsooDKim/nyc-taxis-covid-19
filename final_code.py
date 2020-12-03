@@ -123,18 +123,24 @@ def drawNetwork(month):
     st.pyplot(plt.gcf())
     plt.clf()
 
-degreeHistogram(marchG,"March")
-st.subheader("Network Drawing of March")
-drawNetwork(marchG)
-degreeHistogram(aprilG,"April")
-st.subheader("Network Drawing of April")
-drawNetwork(aprilG)
-degreeHistogram(mayG,"May")
-st.subheader("Network Drawing of May")
-drawNetwork(mayG)
-degreeHistogram(juneG,"June")
-st.subheader("Network Drawing of June")
-drawNetwork(juneG)
+st.sidebar.markdown("Which month would you like to see a Network Analysis of?")
+choice = st.sidebar.selectbox("Select a month:",("March","April","May","June"))
+if(choice=="March"):
+    degreeHistogram(marchG,"March")
+    st.subheader("Network Drawing of March")
+    drawNetwork(marchG)
+elif(choice=="April"):
+    degreeHistogram(aprilG,"April")
+    st.subheader("Network Drawing of April")
+    drawNetwork(aprilG)
+elif(choice=="May"):
+    degreeHistogram(mayG,"May")
+    st.subheader("Network Drawing of May")
+    drawNetwork(mayG)
+elif(choice=="June"):
+    degreeHistogram(juneG,"June")
+    st.subheader("Network Drawing of June")
+    drawNetwork(juneG)
 
 #Now we will find which locations are most frequently traveled by proportion through betweenness centrality
 def bCent(month,monthName):

@@ -16,11 +16,16 @@ deaths in Manhattan.
 Important Notes:
 
 Github does not allow committing files that are bigger than 100MB, 
-so the taxi data for March is not included in this repository. If you
-need all the files to run this code on your own, please go to 
-https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page 
+so the taxi data for March is trimmed to only what we need in this 
+repository. If you want all the files to run this code on your own, 
+please go to https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page 
 and download the Yellow Taxi Trip Records CSV for March.
 
 Explanations of what each variable means are located here:
 https://www1.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
 https://github.com/nychealth/coronavirus-data/tree/master/trends#data-by-daycsv
+
+Link to the Repository:
+https://github.com/DongsooDKim/nyc-taxis-covid-19
+
+Link to the Report:
