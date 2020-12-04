@@ -56,7 +56,7 @@ june = clean(june)
 cData = cData[cData.index>='3/22/2020']
 cData = cData[cData.index<'7/01/2020']
 
-#For our first analysis, we'll need to get each taxi ride that was longer than 10 miles (significant taxi rides) and their locationID's and replace them with the name of the zone. To do this, we'll create a function
+#For our first analysis, we'll need to get each taxi ride that was longer than 10 miles (significant taxi rides) and their locationID's and replace them with the name of the zone
 marchID = march[["trip_distance","PULocationID","DOLocationID"]]
 marchID = marchID[marchID["trip_distance"]>10]
 aprilID = april[["trip_distance","PULocationID","DOLocationID"]]
@@ -66,6 +66,7 @@ mayID = mayID[mayID["trip_distance"]>10]
 juneID = june[["trip_distance","PULocationID","DOLocationID"]]
 juneID = juneID[juneID["trip_distance"]>10]
 
+#Here is the function to replace the ID's with their corresponding names
 def convertZone(month):
     zoneConversion = dict(zip(zones.LocationID,zones.Zone))
     month.PULocationID = month.PULocationID.map(zoneConversion)
@@ -100,7 +101,7 @@ mayG.add_edges_from(mayEdges)
 juneG.add_edges_from(junEdges)
 
 #Here we will calculate how dense each month's network is to see how much of the possible relationships of pickup locations and dropoff locations are present
-st.subheader("Density of pickup and dropoff locations:")
+st.subheader("Density of pickup and drop-off locations:")
 st.write("March Density: {}".format(nx.density(marchG)))
 st.write("April Density: {}".format(nx.density(aprilG)))
 st.write("May Density: {}".format(nx.density(mayG)))
@@ -142,7 +143,7 @@ elif(choice=="June"):
     st.subheader("Network Drawing of June")
     drawNetwork(juneG)
 
-st.sidebar.markdown("Drawing the network graph may talk a very long time (up to a few minutes!), please have patience, thank you.")
+st.sidebar.markdown("Drawing the network graph may take a very long time (up to a few minutes!), please have patience, thank you.")
 
 #Now we will find which locations are most frequently traveled by proportion through betweenness centrality
 def bCent(month,monthName):
@@ -213,6 +214,13 @@ plt.ylabel("# of COVID-19 Deaths (in one day)")
 st.pyplot(plt.gcf())
 plt.clf()
 
+plt.scatter(merged["trip_distance"],merged["MN_DEATH_COUNT"])
+plt.title("Trip Distance and COVID-19 Deaths in New York City (per day)")
+plt.xlabel("Total Distance Traveled by Yellow Taxis (miles in one day)")
+plt.ylabel("# of COVID-19 Deaths (in one day)")
+st.pyplot(plt.gcf())
+plt.clf()
+
 #We should do some hypothesis tests to see if the difference in population means is statistically significant. We will be using an alpha level of 0.05 to conduct our tests. Any p-values that are less than this alpha level will result in rejecting the null hypothesis for that test and concluding
 # that the difference in population means between these variables is statistically significant.
 st.subheader("Hypothesis Testing")
@@ -224,12 +232,14 @@ lessCases = merged[merged["MN_CASE_COUNT"]<100]
 statistic, pvalue = stats.ttest_ind(moreCases["passenger_count"], lessCases["passenger_count"], equal_var=False)
 st.write("The difference in population means of the number of passengers between days with >=100 cases and days with <100 cases is statisically significant: ")
 st.write(pvalue < alpha)
+st.write("P-value:")
 st.write(pvalue)
 
 #Is there a difference between population means of total miles traveled between days with a high amount of cases (>=100) and days with less cases (<100)?
 statistic, pvalue = stats.ttest_ind(moreCases["trip_distance"], lessCases["trip_distance"], equal_var=False)
 st.write("The difference in population means of the number of miles traveled between days with >=100 cases and days with <100 cases is statisically significant: ")
 st.write(pvalue < alpha)
+st.write("P-value:")
 st.write(pvalue)
 
 #Is there a difference between population means of passengers between days with a high amount of deaths (>=10) and days with less deaths (<10)?
@@ -238,12 +248,14 @@ lessDeaths = merged[merged["MN_DEATH_COUNT"]<10]
 statistic, pvalue = stats.ttest_ind(moreDeaths["passenger_count"], lessDeaths["passenger_count"], equal_var=False)
 st.write("The difference in population means of the number of passengers between days with >=10 deaths and days with <10 deaths is statisically significant: ")
 st.write(pvalue < alpha)
+st.write("P-value:")
 st.write(pvalue)
 
 #Is there a difference between population means of total miles traveled between days with a high amount of deaths(>=10) and days with less deaths (<10)?
 statistic, pvalue = stats.ttest_ind(moreDeaths["trip_distance"], lessDeaths["trip_distance"], equal_var=False)
 st.write("The difference in population means of the number of miles traveled between days with >=10 deaths and days with <10 deaths is statisically significant: ")
 st.write(pvalue < alpha)
+st.write("P-value:")
 st.write(pvalue)
 
 st.header("Link to the Repository:")

@@ -29,3 +29,6 @@ Link to the Repository:
 https://github.com/DongsooDKim/nyc-taxis-covid-19
 
 Link to the Report:
+https://github.com/DongsooDKim/nyc-taxis-covid-19/blob/master/Report.docx
+
+Link to the Dashboard: https://ma346-dkim-taxis1.herokuapp.com/
