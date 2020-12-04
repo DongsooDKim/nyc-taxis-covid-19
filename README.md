@@ -28,7 +28,14 @@ https://github.com/nychealth/coronavirus-data/tree/master/trends#data-by-daycsv
 Link to the Repository:
 https://github.com/DongsooDKim/nyc-taxis-covid-19
 
-Link to the Report:
+Link to the Report (click the "Download" button):
 https://github.com/DongsooDKim/nyc-taxis-covid-19/blob/master/Report.docx
 
 Link to the Dashboard: https://ma346-dkim-taxis1.herokuapp.com/
+
+Link to a Deepnote of the code: https://deepnote.com/project/96cf8a72-da8c-4537-954f-5c1d7f81ab4f
+
+Note: It is recommended that you run this code on your own by
+downloading the final_code.py file and running it on your own Python
+application, as deepnote has limited memory and may take much longer
+than running it on your own.
